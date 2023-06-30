@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'eStore';
+
+  isMenuOpen: boolean = false;
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+}
 }
