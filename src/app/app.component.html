@@ -13,18 +13,23 @@
         </button>
       </div>
       <div class="hidden md:flex md:items-center md:space-x-4">
-        <a routerLink="/home" class="text-white hover:text-gray-200">Home</a>
-        <a routerLink="/about" class="text-white hover:text-gray-200">About</a>
+        <a routerLink="" class="text-white hover:text-gray-200">Home</a>
+        <a routerLink="/search" class="text-white hover:text-gray-200">Search</a>
         <a routerLink="/contact" class="text-white hover:text-gray-200">Contact</a>
       </div>
     </div>
     <div class="md:hidden" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
       <a routerLink="/home" class="block text-white py-2">Home</a>
-      <a routerLink="/about" class="block text-white py-2">About</a>
+      <a routerLink="/about" class="block text-white py-2">Search</a>
       <a routerLink="/contact" class="block text-white py-2">Contact</a>
     </div>
   </div>
 </nav>
+
+
+<section id="home" class="w-full">
+    <router-outlet></router-outlet>
+</section>
 
 
 
@@ -57,3 +62,4 @@
     </div>
   </div>
 </footer>
+
