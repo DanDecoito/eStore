@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
-
+import { SearchInterface } from '../services/searchInterface';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -9,10 +10,16 @@ import { ProductService } from '../services/product.service';
 })
 export class SearchComponent {
   allProductsList: any[] = [];
+  searchResults: SearchInterface[] = [];
+  CategoriesList: any[] = [];
+  selectedCategory: string = '';
+
   constructor(private productService: ProductService) { }
   
   ngOnInit(): void {
     this.loadAllProducts();
+    
+    
   }
   
   
@@ -21,14 +28,29 @@ export class SearchComponent {
     this.productService.getAllProducts().subscribe((data: any[]) =>
     {
       this.allProductsList = data;
-      console.log(this.allProductsList);
     });
   }
 
+
+
+  loadByCategory(category: string) {
+    this.productService.getProductByCategory(category).subscribe((data: any[]) => {
+      this.allProductsList = data;
+      console.log(this.CategoriesList);
+    });
+  }
  
 
 
-
+  onSearch() {
+    if (this.selectedCategory == '') {
+      this.loadAllProducts();
+      }
+    else {
+      this.loadByCategory(this.selectedCategory);
+    }
+    
+  }
 
 
 
