@@ -4,6 +4,7 @@ import { SearchInterface } from '../services/searchInterface';
 import { NgModel } from '@angular/forms';
 import {PageEvent} from '@angular/material/paginator'
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -66,7 +67,8 @@ export class SearchComponent implements OnInit {
       price: item.price,
       description: item.description,
       rating: item.rating,
-      quantity: quantity
+      quantity: quantity,
+      image: item.image
     };
   
     // Get the existing cart items from local storage
