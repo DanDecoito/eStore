@@ -37,7 +37,7 @@
 
 <!-- Modal -->
 <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center z-10">
-  <div class="bg-white rounded-lg p-8 shadow-lg">
+  <div class="bg-slate-300 rounded-lg p-8 shadow-lg h-auto">
     <div class="flex justify-end mb-6">
       <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,14 +47,14 @@
     </div>
     <div class="flex flex-col items-center justify-center">
       <h2 class="text-xl font-bold">Shopping Cart</h2>
-      <div class="grid grid-cols-1">
-        <div *ngFor="let item of cartItem" class="bg-white shadow-md rounded-lg overflow-hidden">
+      <div class="overflow-y-auto max-h-80">
+        <div *ngFor="let item of cartItem" class="bg-gray-200 shadow-md  rounded-lg mb-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <img class="w-24 h-24 object-contain" [src]="item.image" alt="{{ item.title }}" />
+              <img class="w-24 h-24 object-contain rounded-xl" [src]="item.image" alt="{{ item.title }}" />
               <div class="p-4 flex flex-col">
                 <h3 class="text-xl font-medium mb-2">{{ item.title }}</h3>
-                <p>{{'item.price'}}</p>
+                <p>{{ item.price}}</p>
                 <div class="flex items-center space-x-2">
                   <div class="flex items-center border border-gray-300 rounded">
                     <button class="px-2 sm:px-3 py-1 text-sm" (click)="decreaseQuantity(item)">-</button>
@@ -73,11 +73,19 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-end mt-6">
-      <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" (click)="checkout()">Check Out</button>
+    
+    <div class="flex justify-between items-center mt-4 bg-slate-300">
+      <div>
+        <h4 class="text-lg font-bold">Total:</h4>
+        <p class="text-lg">{{ 'calculateTotal()' }}</p>
+      </div>
+      <button class="bg-green-500 text-white px-3 py-2 rounded-sm hover:bg-green-600" (click)="checkout()">Check Out</button>
     </div>
   </div>
 </div>
+
+
+
 
 
 
