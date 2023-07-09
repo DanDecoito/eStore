@@ -3,6 +3,7 @@ import { ProductService } from '../services/product.service';
 import { SearchInterface } from '../services/searchInterface';
 import { NgModel } from '@angular/forms';
 import {PageEvent} from '@angular/material/paginator'
+import { CartServiceService } from '../services/cart-service.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class SearchComponent implements OnInit {
   quantity: number = 1;
   private clickOutsideTimeout: any;
 
-  constructor(private productService: ProductService, private elementRef: ElementRef, private ngZone: NgZone) { }
+  constructor(private productService: ProductService, private elementRef: ElementRef, private ngZone: NgZone, private cartService: CartServiceService) { }
   
   ngOnInit(): void {
     this.loadAllProducts();
@@ -61,43 +62,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  addToCart(item: any, quantity: number) {
-    const cartItem = {
-      title: item.title,
-      price: item.price,
-      description: item.description,
-      rating: item.rating,
-      quantity: quantity
-    };
   
-    // Get the existing cart items from local storage
-    let cartItems: any[] = [];
-    const cartItemsData = localStorage.getItem('cartItems');
-    if (cartItemsData) {
-      try {
-        cartItems = JSON.parse(cartItemsData);
-        if (!Array.isArray(cartItems)) {
-          cartItems = [];
-        }
-      } catch (error) {
-        console.error('Invalid cart items JSON:', error);
-      }
-    }
-  
-    const existingItem = cartItems.find((cart: any) => cart.title === item.title);
-    if (existingItem) {
-      // If the item already exists, update the quantity
-      existingItem.quantity += quantity;
-    } else {
-      // If the item doesn't exist, add it to the cart items
-      cartItems.push(cartItem);
-    }
-  
-    // Save the updated cart items back to local storage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  
-    console.log('Added to cart:', cartItem);
-  }
   
   handlePageEvent(pageEvent: PageEvent){
     const pageIndex = pageEvent.pageIndex;
@@ -119,6 +84,13 @@ export class SearchComponent implements OnInit {
   increaseQuantity() {
     this.quantity++;
   }
+
+
+
+  addToCart(item: any, quantity: number) {
+    this.cartService.addToCart(item, quantity);
+  }
+  
 
 
 

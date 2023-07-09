@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,13 +10,35 @@ export class CartServiceService {
   cartItemsChanged = new Subject<any[]>();
 
   constructor() {
-    // Retrieve cart items from local storage if available
+    this.loadCartItems();
+  }
+
+  private loadCartItems() {
     const cartItemsFromStorage = localStorage.getItem('cartItems');
     if (cartItemsFromStorage) {
-      this.cartItems = JSON.parse(cartItemsFromStorage);
+      try {
+        const parsedItems = JSON.parse(cartItemsFromStorage);
+        if (Array.isArray(parsedItems)) {
+          this.cartItems = parsedItems;
+        } else {
+          console.error('Invalid cart items JSON');
+          this.clearCartItems();
+        }
+      } catch (error) {
+        console.error('Error parsing cart items JSON:', error);
+        this.clearCartItems();
+      }
     }
   }
 
+  private saveCartItems() {
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+  }
+
+  private clearCartItems() {
+    this.cartItems = [];
+    localStorage.removeItem('cartItems');
+  }
 
   addToCart(item: any, quantity: number) {
     const cartItem = {
@@ -27,54 +48,24 @@ export class CartServiceService {
       rating: item.rating,
       quantity: quantity
     };
-  
-    // Get the existing cart items from local storage
-    let cartItems: any[] = [];
-    const cartItemsData = localStorage.getItem('cartItems');
-    if (cartItemsData) {
-      try {
-        cartItems = JSON.parse(cartItemsData);
-        if (!Array.isArray(cartItems)) {
-          cartItems = [];
-        }
-      } catch (error) {
-        console.error('Invalid cart items JSON:', error);
-      }
-    }
-  
-    const existingItem = cartItems.find((cart: any) => cart.title === item.title);
+
+    const existingItem = this.cartItems.find((cart: any) => cart.title === item.title);
     if (existingItem) {
-      // If the item already exists, update the quantity
       existingItem.quantity += quantity;
     } else {
-      // If the item doesn't exist, add it to the cart items
-      cartItems.push(cartItem);
+      this.cartItems.push(cartItem);
     }
-  
-    // Save the updated cart items back to local storage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  
+
+    this.saveCartItems();
     console.log('Added to cart:', cartItem);
   }
 
-
-
-
-
-
   removeFromCart(item: any) {
-    const itemIndex = this.cartItems.indexOf(item);
+    const itemIndex = this.cartItems.findIndex((cart: any) => cart.title === item.title);
     if (itemIndex > -1) {
       this.cartItems.splice(itemIndex, 1);
-      localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
+      this.saveCartItems();
       this.cartItemsChanged.next(this.cartItems);
     }
   }
-  
-
-
-
-
-
-
 }
