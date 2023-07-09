@@ -4,6 +4,7 @@ import { SearchInterface } from '../services/searchInterface';
 import { NgModel } from '@angular/forms';
 import {PageEvent} from '@angular/material/paginator'
 
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
