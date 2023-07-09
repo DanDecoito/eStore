@@ -1,8 +1,8 @@
-<nav class="bg-blue-500">
+<nav class="bg-[#7392B7]">
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
-        <a routerLink="/" class="text-white font-bold text-lg">Logo</a>
+        <a routerLink="/" class=" font-bold text-lg font-cinzel text-[#F3C969]">Trendsettra</a>
       </div>
       <div class="md:hidden flex items-center"> <!-- Added "flex" class -->
         <button type="button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white" aria-label="Toggle menu" (click)="toggleMenu()">
@@ -11,31 +11,29 @@
             <path *ngIf="isMenuOpen" class="text-white" fill-rule="evenodd" clip-rule="evenodd" d="M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-4 0a4 4 0 1 0-8 0 4 4 0 0 0 8 0zm-8-1a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm0 5a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm4-5a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm0 5a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2z" />
           </svg>
         </button>
-        <button type="button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
+        <button type="button" class="font-cinzel text-[#F3C969] hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
           <mat-icon matBadge={{cartItem.length}} matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below"><i class="material-icons">shopping_cart</i> </mat-icon>
 
         </button>
       </div>
-      <div class="hidden md:flex md:items-center md:space-x-4">
-        <a routerLink="" class="text-white hover:text-gray-200">Home</a>
-        <a routerLink="/search" class="text-white hover:text-gray-200">Search</a>
-        <a routerLink="/contact" class="text-white hover:text-gray-200">Contact</a>
-        <button type="button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
+      <div class="hidden md:flex md:items-center md:space-x-4 ">
+        <a routerLink="" class="text-[#F3C969] hover:text-gray-200 font-cinzel">Home</a>
+        <a routerLink="/search" class="text-[#F3C969] hover:text-gray-200 font-cinzel">Search</a>
+        <a routerLink="/contact" class="text-[#F3C969] hover:text-gray-200 font-cinzel">Contact</a>
+        <button type="button" class=" text-[#F3C969] hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
         <div class=" mt-2">
                    <mat-icon matBadge={{cartItem.length}} matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below"><i class="material-icons">shopping_cart</i> </mat-icon>
             <!-- Include text description of the icon's meaning for screen-readers -->
-            <span class="cdk-visually-hidden">
-              Example with a home icon with overlaid badge showing the number 15
-            </span>
+
         </div>
         </button>
       </div>
     </div>
     <div class="md:hidden" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
-      <a routerLink="" class="block text-white py-2">Home</a>
-      <a routerLink="/search" class="block text-white py-2">Search</a>
-      <a routerLink="/contact" class="block text-white py-2">Contact</a>
-      <button type="button" class="block text-white py-2" aria-label="Shopping Cart" (click)="openModal()">
+      <a routerLink="" class="block font-cinzel text-[#F3C969] py-2">Home</a>
+      <a routerLink="/search" class="block font-cinzel text-[#F3C969] py-2">Search</a>
+      <a routerLink="/contact" class="block font-cinzel text-[#F3C969] py-2">Contact</a>
+      <button type="button" class="block font-cinzel text-[#F3C969] py-2" aria-label="Shopping Cart" (click)="openModal()">
         <!-- Add your shopping cart icon here -->
       </button>
     </div>
@@ -43,19 +41,19 @@
 </nav>
 
 <!-- Modal -->
-<div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center z-10">
-  <div class="bg-slate-300 rounded-lg p-8 shadow-lg h-auto">
+<div *ngIf="isModalOpen" class="w-2/3 mx-auto fixed inset-0 flex items-center justify-center z-10 text-[#F3C969]">
+  <div class="bg-[#7392B7] rounded-lg p-8 shadow-lg h-auto">
     <div class="flex justify-end mb-6">
-      <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button (click)="closeModal()" class="text-[#F3C969] hover:text-gray-700 focus:outline-none">
+        <svg class="h-6 w-6 text-[#F3C969]" fill="none" viewBox="0 0 24 24" stroke="">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
     <div class="flex flex-col items-center justify-center">
-      <h2 class="text-xl font-bold">Shopping Cart</h2>
+      <h2 class="text-3xl font-cinzel text-[#F3C969] mb-4">Shopping Cart</h2>
       <div class="overflow-y-auto max-h-80">
-        <div *ngFor="let item of cartItem" class="bg-gray-200 shadow-md  rounded-lg mb-4">
+        <div *ngFor="let item of cartItem" class="bg-[#D8E1E9] text-black shadow-md  rounded-lg mb-4 mx-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center">
               <img class="w-24 h-24 object-contain rounded-xl" [src]="item.image" alt="{{ item.title }}" />
@@ -81,12 +79,12 @@
       </div>
     </div>
     
-    <div class="flex justify-between items-center mt-4 bg-slate-300">
+    <div class="flex justify-between items-center mt-4 bg-[#7392B7]">
       <div>
         <h4 class="text-lg font-bold">Total:</h4>
         <p class="text-lg">{{ 'calculateTotal()' }}</p>
       </div>
-      <button class="bg-green-500 text-white px-3 py-2 rounded-sm hover:bg-green-600" (click)="checkout()">Check Out</button>
+      <button class="bg-[#73956F] text-white px-3 py-2 rounded-sm hover:bg-green-600" (click)="checkout()">Check Out</button>
     </div>
   </div>
 </div>
@@ -98,28 +96,28 @@
 
 
 
-<footer class="bg-gray-800 py-8">
+<footer class="bg-[#7392B7] text-[#F3C969] py-8 font-cinzel">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-wrap justify-between">
       <div class="w-full sm:w-1/2 md:w-1/4 lg:w-1/3 mb-6">
-        <h3 class="text-white text-lg mb-2">About Us</h3>
-        <p class="text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h3 class=" text-lg mb-2">About Us</h3>
+        <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
       <div class="w-full sm:w-1/2 md:w-1/4 lg:w-1/3 mb-6">
-        <h3 class="text-white text-lg mb-2">Contact Us</h3>
-        <p class="text-gray-300">123 Street, City</p>
-        <p class="text-gray-300">contact@example.com</p>
-        <p class="text-gray-300">123-456-7890</p>
+        <h3 class=" text-lg mb-2">Contact Us</h3>
+        <p class="">707 Boeing, Nebraska</p>
+        <p class="">Trendsettra@Email.com</p>
+        <p class="">123-456-7890</p>
       </div>
     </div>
     <hr class="border-gray-700 my-6">
     <div class="flex flex-wrap items-center">
       <div class="w-full sm:w-1/2 text-center sm:text-left">
-        <p class="text-gray-300">&copy; 2023 Your Company. All rights reserved.</p>
+        <p class="">&copy; 2023 Trendsettra. All rights reserved.</p>
       </div>
       <div class="w-full sm:w-1/2 text-center sm:text-right">
-        <ul class="text-gray-300">
-          <li class="inline-block ml-2"><a href="#" class="hover:text-blue-500">Terms of Service</a></li>
+        <ul class="text-sm">
+          <li class="inline-block ml-2 "><a href="#" class="hover:text-blue-500">Terms of Service</a></li>
           <li class="inline-block ml-2"><a href="#" class="hover:text-blue-500">Privacy Policy</a></li>
           <li class="inline-block ml-2"><a href="#" class="hover:text-blue-500">Cookie Policy</a></li>
         </ul>

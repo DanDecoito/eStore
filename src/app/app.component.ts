@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     this.updateCartItem(item);
   }
   
-  updateCartItem(item: CartItem) {
+  updateCartItem(item: any) {
     const cartItems = localStorage.getItem('cartItems');
     if (cartItems) {
       const storedCartItems: CartItem[] = JSON.parse(cartItems);
@@ -77,11 +77,11 @@ export class AppComponent implements OnInit {
   
 
   deleteItem(item: CartItem) {
-    const index = this.cartItem.indexOf(item);
-    if (index > -1) {
+    const index = this.cartItem.findIndex((cartItem) => cartItem.title === item.title);
+    if (index !== -1) {
       this.cartItem.splice(index, 1);
+      this.updateCartItem(this.cartItem);
     }
-    this.saveCart();
   }
 
   saveCart() {
