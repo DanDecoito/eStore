@@ -89,6 +89,8 @@ export class SearchComponent implements OnInit {
 
   addToCart(item: any, quantity: number) {
     this.cartService.addToCart(item, quantity);
+    this.cartService.loadCartItems
+    this.closeModal();
   }
   
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartServiceService } from './services/cart-service.service';
 
 interface CartItem {
   title: string;
@@ -18,14 +19,18 @@ export class AppComponent implements OnInit {
   isModalOpen: boolean = false;
   cartItem: CartItem[] = [];
 
+  constructor(private cartService: CartServiceService){}
+
   ngOnInit() {
     this.loadCart();
   }
 
   loadCart() {
-    const cartItems = localStorage.getItem('cartItems');
-    this.cartItem = cartItems ? JSON.parse(cartItems) : [];
-    console.log(this.cartItem);
+
+    this.cartItem = this.cartService.loadCartItems()
+    // const cartItems = localStorage.getItem('cartItems');
+    // this.cartItem = cartItems ? JSON.parse(cartItems) : [];
+
   }
 
   openModal() {

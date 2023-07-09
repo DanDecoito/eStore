@@ -13,7 +13,7 @@ export class CartServiceService {
     this.loadCartItems();
   }
 
-  private loadCartItems() {
+   loadCartItems() {
     const cartItemsFromStorage = localStorage.getItem('cartItems');
     if (cartItemsFromStorage) {
       try {
@@ -29,6 +29,7 @@ export class CartServiceService {
         this.clearCartItems();
       }
     }
+    return this.cartItems
   }
 
   private saveCartItems() {
@@ -46,7 +47,8 @@ export class CartServiceService {
       price: item.price,
       description: item.description,
       rating: item.rating,
-      quantity: quantity
+      quantity: quantity,
+      image: item.image
     };
 
     const existingItem = this.cartItems.find((cart: any) => cart.title === item.title);
@@ -59,6 +61,8 @@ export class CartServiceService {
     this.saveCartItems();
     console.log('Added to cart:', cartItem);
   }
+
+ 
 
   removeFromCart(item: any) {
     const itemIndex = this.cartItems.findIndex((cart: any) => cart.title === item.title);

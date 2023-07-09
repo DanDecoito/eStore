@@ -4,27 +4,92 @@
       <div class="flex items-center">
         <a routerLink="/" class="text-white font-bold text-lg">Logo</a>
       </div>
-      <div class="md:hidden">
+      <div class="md:hidden flex items-center"> <!-- Added "flex" class -->
         <button type="button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white" aria-label="Toggle menu" (click)="toggleMenu()">
           <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
             <path *ngIf="!isMenuOpen" class="text-white" fill-rule="evenodd" clip-rule="evenodd" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
             <path *ngIf="isMenuOpen" class="text-white" fill-rule="evenodd" clip-rule="evenodd" d="M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0zm-4 0a4 4 0 1 0-8 0 4 4 0 0 0 8 0zm-8-1a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm0 5a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm4-5a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm0 5a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2z" />
           </svg>
         </button>
+        <button type="button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
+          <mat-icon matBadge={{cartItem.length}} matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below"><i class="material-icons">shopping_cart</i> </mat-icon>
+
+        </button>
       </div>
       <div class="hidden md:flex md:items-center md:space-x-4">
         <a routerLink="" class="text-white hover:text-gray-200">Home</a>
         <a routerLink="/search" class="text-white hover:text-gray-200">Search</a>
         <a routerLink="/contact" class="text-white hover:text-gray-200">Contact</a>
+        <button type="button" class="text-gray-300 hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
+        <div class=" mt-2">
+                   <mat-icon matBadge={{cartItem.length}} matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below"><i class="material-icons">shopping_cart</i> </mat-icon>
+            <!-- Include text description of the icon's meaning for screen-readers -->
+            <span class="cdk-visually-hidden">
+              Example with a home icon with overlaid badge showing the number 15
+            </span>
+        </div>
+        </button>
       </div>
     </div>
     <div class="md:hidden" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
-      <a routerLink="/home" class="block text-white py-2">Home</a>
-      <a routerLink="/about" class="block text-white py-2">Search</a>
+      <a routerLink="" class="block text-white py-2">Home</a>
+      <a routerLink="/search" class="block text-white py-2">Search</a>
       <a routerLink="/contact" class="block text-white py-2">Contact</a>
+      <button type="button" class="block text-white py-2" aria-label="Shopping Cart" (click)="openModal()">
+        <!-- Add your shopping cart icon here -->
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- Modal -->
+<div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center z-10">
+  <div class="bg-slate-300 rounded-lg p-8 shadow-lg h-auto">
+    <div class="flex justify-end mb-6">
+      <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="flex flex-col items-center justify-center">
+      <h2 class="text-xl font-bold">Shopping Cart</h2>
+      <div class="overflow-y-auto max-h-80">
+        <div *ngFor="let item of cartItem" class="bg-gray-200 shadow-md  rounded-lg mb-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <img class="w-24 h-24 object-contain rounded-xl" [src]="item.image" alt="{{ item.title }}" />
+              <div class="p-4 flex flex-col">
+                <h3 class="text-xl font-medium mb-2">{{ item.title }}</h3>
+                <p>{{ item.price}}</p>
+                <div class="flex items-center space-x-2">
+                  <div class="flex items-center border border-gray-300 rounded">
+                    <button class="px-2 sm:px-3 py-1 text-sm" (click)="decreaseQuantity(item)">-</button>
+                    <span class="px-2 sm:px-3 py-1">{{ item.quantity }}</span>
+                    <button class="px-2 sm:px-3 py-1 text-sm" (click)="increaseQuantity(item)">+</button>
+                  </div>
+                  <button class="flex items-center justify-center bg-red-500 w-10 text-white px-1 py-1 rounded hover:bg-red-600" (click)="deleteItem(item)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex justify-between items-center mt-4 bg-slate-300">
+      <div>
+        <h4 class="text-lg font-bold">Total:</h4>
+        <p class="text-lg">{{ 'calculateTotal()' }}</p>
+      </div>
+      <button class="bg-green-500 text-white px-3 py-2 rounded-sm hover:bg-green-600" (click)="checkout()">Check Out</button>
+    </div>
+  </div>
+</div>
 
 
 <section id="home" class="w-full">
