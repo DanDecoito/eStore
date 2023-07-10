@@ -55,40 +55,28 @@ export class AppComponent implements OnInit {
   decreaseQuantity(item: CartItem) {
     if (item.quantity > 1) {
       item.quantity--;
-      this.updateCartItem(item);
+      this.updateCartItem();
       this.calculateTotal();
     }
   }
   
   increaseQuantity(item: CartItem) {
     item.quantity++;
-    this.updateCartItem(item);
+    this.updateCartItem();
     this.calculateTotal();
   }
   
-  updateCartItem(item: any) {
-    const cartItems = localStorage.getItem('cartItems');
-    if (cartItems) {
-      const storedCartItems: CartItem[] = JSON.parse(cartItems);
-      const updatedCartItems = storedCartItems.map((storedItem) => {
-        if (storedItem.title === item.title) {
-          storedItem.quantity = item.quantity;
-        }
-        return storedItem;
-      });
-      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-    }
-  }
-  
-
   deleteItem(item: CartItem) {
     const index = this.cartItem.findIndex((cartItem) => cartItem.title === item.title);
     if (index !== -1) {
       this.cartItem.splice(index, 1);
-      this.updateCartItem(this.cartItem);
-      
+      this.updateCartItem();
     }
     this.calculateTotal();
+  }
+  
+  updateCartItem() {
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItem));
   }
 
   saveCart() {
