@@ -28,11 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   loadCart() {
-
     this.cartItem = this.cartService.loadCartItems()
-    // const cartItems = localStorage.getItem('cartItems');
-    // this.cartItem = cartItems ? JSON.parse(cartItems) : [];
-
   }
 
   openModal() {

@@ -9,7 +9,7 @@
       <option value="">All Categories</option>
       <option value="men's clothing">Men's Clothing</option>
       <option value="women's clothing">Women's Clothing</option>
-      <option value="jewelry">Jewelry</option>
+      <option value="jewelery">Jewelry</option>
       <option value="electronics">Electronics</option>
     </select>
     <button class="h-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r mt-2 sm:mt-0" (click)="onSearch()">
@@ -33,7 +33,7 @@
   <div class="w-full my-10 px-4" *ngFor="let item of paginatedProductsList">
     <button class="bg-white rounded-lg shadow-md p-4 focus:outline-none flex flex-col justify-between hover:bg-slate-300" (click)="openModal(item)">
       <div class="flex items-center justify-center">
-        <img class="w-full h-48 object-contain rounded-2xl" src="{{ item.image }}" alt="{{ item.title }}">
+        <img class="w-full h-48 object-contain rounded-2xl" src="{{item.image}}" alt="{{ item.title }}">
       </div>
       <div class="mt-4">
         <h2 class="text-lg font-semibold h-16 overflow-hidden">{{ item.title }}</h2>
