@@ -43,11 +43,11 @@
 <!-- Modal -->
 <div *ngIf="isModalOpen" class="w-2/3 mx-auto fixed inset-0 flex items-center justify-center z-10 text-[#F3C969]">
   <div class="bg-[#7392B7] rounded-lg p-8 shadow-lg h-auto">
-    <div class="flex justify-end mb-6">
-      <button (click)="closeModal()" class="text-[#F3C969] hover:text-gray-700 focus:outline-none">
-        <svg class="h-6 w-6 text-[#F3C969]" fill="none" viewBox="0 0 24 24" stroke="">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
+    <div class="flex justify-end mb-6 z-11 text-[#F3C969]">
+      <button (click)="closeModal()" class="text-black hover:text-gray-700 focus:outline-none">
+           <svg class="w-6 h-6 text-[#F3C969]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+  </svg>
       </button>
     </div>
     <div class="flex flex-col items-center justify-center">
@@ -59,7 +59,7 @@
               <img class="w-24 h-24 object-contain rounded-xl" [src]="item.image" alt="{{ item.title }}" />
               <div class="p-4 flex flex-col">
                 <h3 class="text-xl font-medium mb-2">{{ item.title }}</h3>
-                <p>{{ item.price}}</p>
+                <p>{{ '$' + item.price.toFixed(2)}}</p>
                 <div class="flex items-center space-x-2">
                   <div class="flex items-center border border-gray-300 rounded">
                     <button class="px-2 sm:px-3 py-1 text-sm" (click)="decreaseQuantity(item)">-</button>
@@ -82,7 +82,7 @@
     <div class="flex justify-between items-center mt-4 bg-[#7392B7]">
       <div>
         <h4 class="text-lg font-bold">Total:</h4>
-        <p class="text-lg">{{ 'calculateTotal()' }}</p>
+        <p class="text-lg">{{ '$' + calculatedTotal.toFixed(2) }}</p>
       </div>
       <button class="bg-[#73956F] text-white px-3 py-2 rounded-sm hover:bg-green-600" (click)="checkout()">Check Out</button>
     </div>

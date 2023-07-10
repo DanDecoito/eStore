@@ -18,11 +18,13 @@ export class AppComponent implements OnInit {
   isMenuOpen: boolean = false;
   isModalOpen: boolean = false;
   cartItem: CartItem[] = [];
+  calculatedTotal: number = 0;
 
   constructor(private cartService: CartServiceService){}
 
   ngOnInit() {
     this.loadCart();
+    this.calculateTotal();
   }
 
   loadCart() {
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
 
   openModal() {
     this.isModalOpen = true;
+    this.calculateTotal();
   }
 
   closeModal() {
@@ -53,12 +56,14 @@ export class AppComponent implements OnInit {
     if (item.quantity > 1) {
       item.quantity--;
       this.updateCartItem(item);
+      this.calculateTotal();
     }
   }
   
   increaseQuantity(item: CartItem) {
     item.quantity++;
     this.updateCartItem(item);
+    this.calculateTotal();
   }
   
   updateCartItem(item: any) {
@@ -81,10 +86,19 @@ export class AppComponent implements OnInit {
     if (index !== -1) {
       this.cartItem.splice(index, 1);
       this.updateCartItem(this.cartItem);
+      
     }
+    this.calculateTotal();
   }
 
   saveCart() {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItem));
   }
+
+  calculateTotal() {
+    const multipliedValues = this.cartItem.map(item => item.price * item.quantity);
+    const total = multipliedValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    this.calculatedTotal = Number(total.toFixed(2));
+  }
+
 }
