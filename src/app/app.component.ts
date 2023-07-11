@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartServiceService } from './services/cart-service.service';
+import { StripeService } from './services/stripe.service';
 
 interface CartItem {
   title: string;
@@ -19,8 +21,11 @@ export class AppComponent implements OnInit {
   isModalOpen: boolean = false;
   cartItem: CartItem[] = [];
 
+  constructor(private cartService: CartServiceService){}
+
   ngOnInit() {
     this.loadCart();
+    this.calculateTotal();
   }
 
   loadCart() {
@@ -31,6 +36,7 @@ export class AppComponent implements OnInit {
 
   openModal() {
     this.isModalOpen = true;
+    this.calculateTotal();
   }
 
   closeModal() {
@@ -41,46 +47,50 @@ export class AppComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  checkout() {
-    // Add your checkout logic here
-  }
+
 
   decreaseQuantity(item: CartItem) {
     if (item.quantity > 1) {
       item.quantity--;
-      this.updateCartItem(item);
+      this.updateCartItem();
+      this.calculateTotal();
     }
   }
   
   increaseQuantity(item: CartItem) {
     item.quantity++;
-    this.updateCartItem(item);
+    this.updateCartItem();
+    this.calculateTotal();
   }
   
-  updateCartItem(item: CartItem) {
-    const cartItems = localStorage.getItem('cartItems');
-    if (cartItems) {
-      const storedCartItems: CartItem[] = JSON.parse(cartItems);
-      const updatedCartItems = storedCartItems.map((storedItem) => {
-        if (storedItem.title === item.title) {
-          storedItem.quantity = item.quantity;
-        }
-        return storedItem;
-      });
-      localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-    }
-  }
-  
-
   deleteItem(item: CartItem) {
-    const index = this.cartItem.indexOf(item);
-    if (index > -1) {
+    const index = this.cartItem.findIndex((cartItem) => cartItem.title === item.title);
+    if (index !== -1) {
       this.cartItem.splice(index, 1);
+      this.updateCartItem();
     }
-    this.saveCart();
+    this.calculateTotal();
+  }
+  
+  updateCartItem() {
+    localStorage.setItem('cartItems', JSON.stringify(this.cartItem));
   }
 
   saveCart() {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItem));
   }
+
+  calculateTotal() {
+    const multipliedValues = this.cartItem.map(item => item.price * item.quantity);
+    const total = multipliedValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    this.calculatedTotal = Number(total.toFixed(2));
+  }
+
+
+
+  checkout() {
+    // Add your checkout logic here
+    this.stripeService.loadStripe();
+  }
+
 }
