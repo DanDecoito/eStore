@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartServiceService } from './services/cart-service.service';
+import { StripeService } from './services/stripe.service';
 
 interface CartItem {
   title: string;
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   cartItem: CartItem[] = [];
   calculatedTotal: number = 0;
 
-  constructor(private cartService: CartServiceService){}
+  constructor(private cartService: CartServiceService, private stripeService: StripeService){}
 
   ngOnInit() {
     this.loadCart();
@@ -44,9 +45,7 @@ export class AppComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  checkout() {
-    // Add your checkout logic here
-  }
+
 
   decreaseQuantity(item: CartItem) {
     if (item.quantity > 1) {
@@ -83,6 +82,13 @@ export class AppComponent implements OnInit {
     const multipliedValues = this.cartItem.map(item => item.price * item.quantity);
     const total = multipliedValues.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     this.calculatedTotal = Number(total.toFixed(2));
+  }
+
+
+
+  checkout() {
+    // Add your checkout logic here
+    this.stripeService.loadStripe();
   }
 
 }
