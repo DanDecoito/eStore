@@ -19,7 +19,6 @@
       <div class="hidden md:flex md:items-center md:space-x-4 ">
         <a routerLink="" class="text-[#F3C969] hover:text-gray-200 font-cinzel">Home</a>
         <a routerLink="/search" class="text-[#F3C969] hover:text-gray-200 font-cinzel">Search</a>
-        <a routerLink="/contact" class="text-[#F3C969] hover:text-gray-200 font-cinzel">Contact</a>
         <button type="button" class=" text-[#F3C969] hover:text-white focus:outline-none focus:text-white ml-4" aria-label="Shopping Cart" (click)="openModal()">
         <div class=" mt-2">
                    <mat-icon matBadge={{cartItem.length}} matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below"><i class="material-icons">shopping_cart</i> </mat-icon>
@@ -32,7 +31,6 @@
     <div class="md:hidden" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
       <a routerLink="" class="block font-cinzel text-[#F3C969] py-2">Home</a>
       <a routerLink="/search" class="block font-cinzel text-[#F3C969] py-2">Search</a>
-      <a routerLink="/contact" class="block font-cinzel text-[#F3C969] py-2">Contact</a>
       <button type="button" class="block font-cinzel text-[#F3C969] py-2" aria-label="Shopping Cart" (click)="openModal()">
         <!-- Add your shopping cart icon here -->
       </button>
