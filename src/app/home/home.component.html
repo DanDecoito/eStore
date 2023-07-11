@@ -1,55 +1,66 @@
 <div class="bg-[#D8E1E9]">
-<section class="bg-[#D8E1E9]">
-  <div class="flex md:flex-row">
+  <section class="bg-[#D8E1E9]">
+    <div class="flex md:flex-row  font-cinzel text-[#F3C969] font-bold">
       <div class="w-full relative">
-          <img src="https://plus.unsplash.com/premium_photo-1664453546814-19c8fab391e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80" alt="Image 1" class="w-full h-auto object-cover">
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          </div>
+        <img src="https://plus.unsplash.com/premium_photo-1664453546814-19c8fab391e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80" alt="Image 1" class="w-full h-auto object-cover">
+        <div class="absolute top-[14%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <p class="text-2xl" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)">Imagine</p>
+        </div>
       </div>
+
       <div class="w-full relative">
-          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="Image 2" class="w-full h-auto object-cover">
-          <div class="absolute top-1/4 md:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-              <p class="text-2xl text-white" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)"></p>
-              <a href="#" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-2 px-4 rounded mt-8 inline-block shadow-md">Shop Now</a>
-          </div>
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="Image 2" class="w-full h-auto object-cover">
+        <div class="absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <p class="text-2xl " style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)">Inspire</p>
+          <a href="#" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-2 px-4 rounded mt-4 inline-block shadow-md">Shop Now</a>
+        </div>
       </div>
+
       <div class="w-full relative">
-          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="Image 3" class="w-full h-auto object-cover">
-          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-              <p class="text-2xl text-white"></p>
-          </div>
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60" alt="Image 1" class="w-full h-auto object-cover">
+        <div class="absolute top-[12%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <p class="text-2xl" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)">Innovate</p>
+        </div>
       </div>
-  </div>
-</section>
+        
+
+    </div>
+  </section>
+
+
 
 
 
 <section class="bg-[#D8E1E9] mt-0">
   <div class="text-center mt-12 font-cinzel text-[#F3C969] mb-4">
-      <h2 class="text-4xl font-bold">Special Offers</h2>
+    <h2 class="text-4xl font-bold">Special Offers</h2>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-10 bg-[#D8E1E9]">
-      <ng-container *ngFor="let item of randomProducts">
-          <div class="w-full my-10 px-4">
-              <button class="bg-white rounded-lg shadow-md p-4 focus:outline-none flex flex-col justify-between hover:bg-slate-300">
-                  <div class="flex items-center justify-center">
-                      <img class="w-full h-48 object-contain rounded-2xl" [src]="item.image" [alt]="item.title">
-                  </div>
-                  <div class="mt-4">
-                      <h2 class="text-lg font-semibold h-16 overflow-hidden">{{ item.title }}</h2>
-                      <p class="text-gray-600 mt-2 text-left">{{ '$' + item.price.toFixed(2) }}</p>
-                      <p class="text-gray-600 text-left">{{ item.category }}</p>
-                      <p class="text-gray-600 mt-2 line-clamp-3 text-left">{{ item.description }}</p>
-                      <div class="flex items-center mt-2">
-                          <span class="text-yellow-500 mr-1">&#9733;</span>
-                          <span class="text-gray-600">{{ item.rating.rate }}</span>
-                      </div>
-                  </div>
-              </button>
+    <ng-container *ngFor="let item of randomProducts">
+      <div class="w-full my-10 px-4">
+        <button class="bg-white rounded-lg shadow-md p-4 focus:outline-none flex flex-col justify-between hover:bg-slate-300">
+          <div class="flex items-center justify-center">
+            <img class="w-full h-48 object-contain rounded-2xl" [src]="item.image" [alt]="item.title">
           </div>
-      </ng-container>
+          <div class="mt-4">
+            <h2 class="text-lg font-semibold h-16 overflow-hidden">{{ item.title }}</h2>
+            <p class="text-gray-600 mt-2 text-left">{{ '$' + item.price.toFixed(2) }}</p>
+            <p class="text-gray-600 text-left">{{ item.category }}</p>
+            <p class="text-gray-600 mt-2 line-clamp-3 text-left">{{ item.description }}</p>
+            <div class="flex items-center mt-2">
+              <span class="text-yellow-500 mr-1">&#9733;</span>
+              <span class="text-gray-600">{{ item.rating.rate }}</span>
+            </div>
+          </div>
+          <div class="flex justify-end mt-4">
+            <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" (click)="addToCart(item, 1)">Add to Cart</button>
+          </div>
+        </button>
+      </div>
+    </ng-container>
   </div>
 </section>
+
 
 <section class="social-section bg-[#D8E1E9] pb-16 text-[#F3C969] font-cinzel">
   <div class="text-center mt-6">
